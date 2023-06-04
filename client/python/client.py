@@ -14,7 +14,7 @@ def send_data(client, data):
 if __name__ == '__main__':
 
     host = '127.0.0.1'
-    port = 8080
+    port = 9999
 
     client = socket.socket()  # 创建TCP/IP套接字
     client.connect((host, port))  # 主动初始化TCP服务器连接

@@ -51,7 +51,7 @@ void WorkerThread::run()
         m_task->destroy();
         m_task = NULL;
 
-        Singleton<ThreadPool>::instance()->move_to_idle_list(this);
+        Singleton<ThreadPool>::instance()->move_to_idle_list(this); 
 
         rc = pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, &old_state);
         pthread_testcancel(); // cancel-point

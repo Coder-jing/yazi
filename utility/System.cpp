@@ -31,7 +31,7 @@ void System::init()
     m_root_path = get_root_path();
 
     const string & logdir = m_root_path + "/log";
-    DIR * dp = opendir(logdir.c_str());
+    DIR * dp = opendir(logdir.c_str());                                                                                                      
     if (dp == NULL)
     {
         mkdir(logdir.c_str(), 0755);
@@ -53,6 +53,18 @@ void System::init()
     workflow->load(get_root_path() + "/config/workflow.xml");
 }
 
+/*
+这段代码涉及了对进程资源限制的设置。具体来说，它设置了核心转储文件的大小限制和数据段的大小限制。
+
+首先，通过getrlimit函数获取当前的核心转储文件大小限制，即通过RLIMIT_CORE参数指定。获取的结果保存在结构体变量x中。
+然后，将当前限制的软限制和硬限制都设置为相同的值，即x.rlim_cur = x.rlim_max，表示将限制设置为最大值。接着，使用setrlimit函数将新的核心转储文件大小限制应用于进程。
+
+接下来，通过getrlimit函数获取当前的数据段大小限制，即通过RLIMIT_DATA参数指定。
+同样，获取的结果保存在结构体变量x中。然后，将数据段的软限制设置为768000000，即x.rlim_cur = 768000000。最后，使用setrlimit函数将新的数据段大小限制应用于进程。
+
+这段代码的目的是设置核心转储文件大小限制和数据段大小限制，可能是为了处理核心转储文件或控制进程的内存使用情况。
+请注意，对于修改进程资源限制，可能需要适当的权限和操作系统支持，否则可能会导致操作失败。在实际应用中，应该根据具体的需求和环境进行设置，并进行错误处理来确保设置正确生效。
+*/
 void System::core_dump()
 {
     // core dump

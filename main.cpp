@@ -12,6 +12,7 @@ using namespace yazi::server;
 
 int main()
 {
+    //系统初始化
     System * sys = Singleton<System>::instance();
     sys->init();
 
@@ -22,6 +23,7 @@ int main()
     int max_conn = (*ini)["server"]["max_conn"];
     int wait_time = (*ini)["server"]["wait_time"];
 
+    //服务启动
     Server * server = Singleton<Server>::instance();
     server->set_threads(threads);
     server->set_connects(max_conn);

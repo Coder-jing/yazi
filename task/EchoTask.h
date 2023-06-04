@@ -15,7 +15,7 @@ public:
     EchoTask(Socket * socket);
     virtual ~EchoTask();
 
-    virtual void run();
+    virtual void run(); 
 
     virtual void destroy();
 };

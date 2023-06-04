@@ -73,11 +73,13 @@ void Logger::log(Level level, const char* file, int line, const char* format, ..
     len = snprintf(NULL, 0, fmt, timestamp, s_level[level], file, line);
     if (len > 0)
     {
-        char * buffer = new char[len + 1];
+        //char * buffer = new char[len + 1];
+        char buffer[len+1];
         snprintf(buffer, len + 1, fmt, timestamp, s_level[level], file, line);
         buffer[len] = 0;
         m_fout << buffer;
-        delete buffer;
+        //delete buffer;
+        memset(buffer,0,sizeof(buffer));
         m_len += len;
     }
 
@@ -87,13 +89,15 @@ void Logger::log(Level level, const char* file, int line, const char* format, ..
     va_end(arg_ptr);
     if (len > 0)
     {
-        char * content = new char[len + 1];
+        //char * content = new char[len + 1];
+        char content[len+1];
         va_start(arg_ptr, format);
         vsnprintf(content, len + 1, format, arg_ptr);
         va_end(arg_ptr);
         content[len] = 0;
         m_fout << content;
-        delete content;
+        //delete content;
+        memset(content,0,sizeof(content));
         m_len += len;
     }
 

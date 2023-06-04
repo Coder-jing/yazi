@@ -70,7 +70,7 @@ void SocketHandler::handle(int max_connections, int wait_time)
         int num = m_epoll->wait(wait_time);
         if (num == 0)
         {
-            // debug("no events");
+            //debug("no events");
             continue;
         }
         for (int i = 0; i < num; i++)
