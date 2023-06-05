@@ -74,13 +74,17 @@ public:
         return m_children.end();
     }
 
+    void print(Element element);
+    void print();
+
+
     static Element const & null();
 
 private:
-    string m_name;
-    string m_text;
-    std::vector<Element> m_children;
-    std::map<string, string> m_attrs;
+    string m_name;  //xml元素
+    string m_text;  //xml元素文本
+    std::vector<Element> m_children;    //XML 元素的子元素
+    std::map<string, string> m_attrs;   //XML 元素的属性
 };
 
 }}

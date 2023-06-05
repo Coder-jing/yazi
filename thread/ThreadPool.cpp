@@ -13,16 +13,17 @@ ThreadPool::~ThreadPool()
 {
 }
 
+//创建线程池
 void ThreadPool::create(int threads)
 {
     AutoLock lock(&m_mutex_idle);
     m_threads = threads;
     for (int i = 0; i < threads; i++)
     {
-        Thread* thread = new WorkerThread();
+        Thread* thread = new WorkerThread();    //实际调用Thread的默认构造函数 Thread::Thread() : m_tid(0), m_task(NULL){}
         debug("create thread %x", thread);
         m_list_idle.insert(thread);
-        thread->start();
+        thread->start();    //设置线程作用范围、线程分离
     }
 }
 

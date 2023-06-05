@@ -85,6 +85,7 @@ Element Document::parse()
 
         // parse elem's name
         name = parse_element_name();
+        cout<<"elem.name= "<<name<<endl;
         elem.name(name);
 
         skip_white_spaces();

@@ -49,6 +49,7 @@ bool Workflow::load(const string &workinfo)
             error("plugin switch: %s is not supported: %s", name.c_str(), flag.c_str());
             return false;
         }
+        
         if (!load_plugin(work, (*it)))
         {
             return false;

@@ -30,7 +30,7 @@ void System::init()
 
     m_root_path = get_root_path();
 
-    const string & logdir = m_root_path + "/log";
+    const string& logdir = m_root_path + "/log";
     DIR * dp = opendir(logdir.c_str());                                                                                                      
     if (dp == NULL)
     {
@@ -86,18 +86,7 @@ string System::get_root_path()
     }
     char path[1024];
     memset(path, 0, 1024);
-    int cnt = readlink("/proc/self/exe", path, 1024);
-    if (cnt < 0 || cnt >= 1024)
-    {
+    if(getcwd(path,sizeof(path))==NULL)
         return "";
-    }
-    for (int i = cnt; i >= 0; --i)
-    {
-        if (path[i] == '/')
-        {
-            path[i] = '\0';
-            break;
-        }
-    }
     return string(path);
 }

@@ -1,7 +1,9 @@
 #include <sstream>
+#include <iostream>
 
 #include "Element.h"
 using namespace yazi::xml;
+using namespace std;
 
 Element::Element()
 {
@@ -126,6 +128,49 @@ string Element::toString() const
     os << "</" << m_name << ">";
     return os.str();
 }
+
+void Element::print(Element element)
+{
+    /*
+    string m_name;  //xml元素
+    string m_text;  //xml元素文本
+    std::vector<Element> m_children;    //XML 元素的子元素
+    std::map<string, string> m_attrs;   //XML 元素的属性
+    */
+    cout<<"m_name:"<<element.m_name<<endl;
+    cout<<"m_text:"<<element.m_text<<endl;
+    for(auto it=element.m_children.begin();it!=element.m_children.end();it++)
+    {
+        print(*it);
+    }
+    cout<<endl;
+    for(auto it=element.m_attrs.begin();it!=element.m_attrs.end();it++)
+    {
+        cout<<it->first<<" : "<<it->second<<endl;
+    }
+}
+
+void Element::print()
+{
+    /*
+    string m_name;  //xml元素
+    string m_text;  //xml元素文本
+    std::vector<Element> m_children;    //XML 元素的子元素
+    std::map<string, string> m_attrs;   //XML 元素的属性
+    */
+    cout<<"m_name:"<<m_name<<endl;
+    cout<<"m_text:"<<m_text<<endl;
+    for(auto it=m_children.begin();it!=m_children.end();it++)
+    {
+        print(*it);
+    }
+    cout<<endl;
+    for(auto it=m_attrs.begin();it!=m_attrs.end();it++)
+    {
+        cout<<it->first<<" : "<<it->second<<endl;
+    }
+}
+
 
 Element const & Element::null()
 {

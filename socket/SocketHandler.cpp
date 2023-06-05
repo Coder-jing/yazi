@@ -61,7 +61,7 @@ void SocketHandler::handle(int max_connections, int wait_time)
 {
     m_epoll = new EventPoller(false);
     m_epoll->create(max_connections);
-    m_epoll->add(m_server->m_sockfd, m_server, (EPOLLIN | EPOLLHUP | EPOLLERR));
+    m_epoll->add(m_server->m_sockfd, m_server, (EPOLLIN | EPOLLHUP | EPOLLERR));    //进行读取操作（EPOLLIN），并且还希望监听错误（EPOLLHUP）和异常（EPOLLERR）事件。
     m_sockpool.init(max_connections);
 
     debug("epoll wait time: %dms", wait_time);

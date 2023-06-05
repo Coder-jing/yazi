@@ -27,7 +27,7 @@ void EventPoller::ctrl(int fd, void * ptr, __uint32_t events, int op)
     ev.data.ptr = ptr;
     if (m_et)
     {
-        ev.events = events | EPOLLET;
+        ev.events = events | EPOLLET;   //将事件触发模式设置为边缘触发模式
     }
     else
     {

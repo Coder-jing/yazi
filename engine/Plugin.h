@@ -27,6 +27,12 @@ protected:
     bool m_switch;
 };
 
+/*
+这段宏定义假设存在一个名为 classType 的插件类，其中：
+
+extern "C" Plugin* create() 是一个导出函数，用于创建插件对象。它通过动态分配内存创建一个 classType 类的对象，并返回其指针。注意 extern "C" 是为了确保函数以 C 语言的方式进行导出。
+extern "C" void destroy(Plugin *p) 是一个导出函数，用于销毁插件对象。它接受一个 Plugin 类的指针作为参数，并在销毁前将指针设为 NULL，然后释放内存。
+*/
 #define DEFINE_PLUGIN(classType)                \
 extern "C" Plugin* create()                     \
 {                                               \

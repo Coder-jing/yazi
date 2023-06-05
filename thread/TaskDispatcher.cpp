@@ -16,7 +16,7 @@ TaskDispatcher::~TaskDispatcher()
 void TaskDispatcher::init(int threads)
 {
     Singleton<ThreadPool>::instance()->create(threads);
-    start();
+    start();        //?
 }
 
 void TaskDispatcher::assign(Task* task)
