@@ -26,7 +26,7 @@ void Document::load_file(const string & filename)
     load_string(buf.str());
 }
 
-void Document::load_string(const string & str)
+void Document::load_string(const string& str)
 {
     m_str = str;
     m_idx = 0;
@@ -92,7 +92,7 @@ Element Document::parse()
 
         while (m_str[m_idx] != '\0')
         {
-            // empty tag
+            // empty tag 如果遇到空元素标签（例如 <element/>），返回对应的 Element 对象，并结束该元素的解析。
             if (m_str[m_idx + 0] == '/')
             {
                 if (m_str[m_idx + 1] == '>')
@@ -105,7 +105,7 @@ Element Document::parse()
                     throw std::logic_error("xml empty element is error");
                 }
             }
-            else if (m_str[m_idx + 0] == '<')
+            else if (m_str[m_idx + 0] == '<')   //如果找到当前元素的结束标签，则返回对应的 Element 对象，并结束该元素的解析。
             {
                 if (m_str[m_idx + 1] == '/')
                 {
@@ -125,7 +125,7 @@ Element Document::parse()
                 else if (m_str[m_idx + 0] == '<' &&
                          m_str[m_idx + 1] == '!' &&
                          m_str[m_idx + 2] == '-' &&
-                         m_str[m_idx + 3] == '-')
+                         m_str[m_idx + 3] == '-')       //解释注释
                 {
                     // parse xml comment
                     if (!parse_comment())
@@ -140,7 +140,7 @@ Element Document::parse()
                     elem.append(child);
                 }
             }
-            else if (m_str[m_idx] == '>')
+            else if (m_str[m_idx] == '>')   //该元素下面有其他元素，解析元素文本内容
             {
                 m_idx++;
                 string text = parse_element_text();
@@ -152,14 +152,14 @@ Element Document::parse()
                 else
                 {
                     // parse child element
-                    Element child = parse();
+                    Element child = parse();    //解析子元素
                     elem.append(child);
                 }
             }
             else
             {
                 // parse elem's attr
-                string key = parse_element_attr_key();
+                string key = parse_element_attr_key();  //解析元素属性内容
 
                 skip_white_spaces();
 

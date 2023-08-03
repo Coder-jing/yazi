@@ -17,7 +17,7 @@ public:
 private:
     Singleton() {}
     Singleton(const Singleton<T> &);
-    Singleton<T> & operator = (const Singleton<T> &);
+    Singleton<T>& operator = (const Singleton<T> &);
     ~Singleton() {}
 
 private:

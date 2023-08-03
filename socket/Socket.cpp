@@ -101,7 +101,8 @@ int Socket::send(const char * buf, int len)
     return ::send(m_sockfd, buf, len, 0);
 }
 
-bool Socket::set_non_blocking()
+/*设置非阻塞IO*/
+bool Socket::set_non_blocking() //设置非阻塞IO
 {
     int flags = fcntl(m_sockfd, F_GETFL, 0);
     if (flags < 0)
@@ -118,6 +119,7 @@ bool Socket::set_non_blocking()
     return true;
 }
 
+/*设置套接字发送缓冲区的大小*/
 bool Socket::set_send_buffer(int size)
 {
     int buff_size = size;
@@ -129,6 +131,7 @@ bool Socket::set_send_buffer(int size)
     return true;
 }
 
+/*设置套接字接收缓冲区的大小*/
 bool Socket::set_recv_buffer(int size)
 {
     int buff_size = size;
@@ -140,16 +143,19 @@ bool Socket::set_recv_buffer(int size)
     return true;
 }
 
+/*设置套接字的延迟关闭选项*/
 bool Socket::set_linger(bool active, int seconds)
 {
-    struct linger l;
-    memset(&l, 0, sizeof(l));
+    struct linger l;    //声明一个 linger 结构体，用于设置套接字的延迟关闭选项。
+    memset(&l, 0, sizeof(l));       //使用 memset 函数将 linger 结构体的内存清零，以确保结构体中的所有字段都被初始化。
 
+    //根据传入的 active 参数，设置 linger 结构体的 l_onoff 字段。
     if (active)
         l.l_onoff = 1;
     else
         l.l_onoff = 0;
-    l.l_linger = seconds;
+
+    l.l_linger = seconds;       //将传入的 seconds 参数赋值给 linger 结构体的 l_linger 字段，表示延迟关闭的时间（以秒为单位）。
 
     if (setsockopt(m_sockfd, SOL_SOCKET, SO_LINGER, &l, sizeof(l)) < 0)
     {
@@ -159,6 +165,7 @@ bool Socket::set_linger(bool active, int seconds)
     return true;
 }
 
+/*设置套接字的保活（Keep-Alive）选项,保活是一种机制，用于检测连接是否仍然有效，以便在连接出现故障时能够及时发现。*/
 bool Socket::set_keep_alive()
 {
     int flag = 1;
@@ -170,6 +177,7 @@ bool Socket::set_keep_alive()
     return true;
 }
 
+/*设置地址复用，在套接字关闭后，允许立即重新绑定到相同的地址和端口，而不需要等待一段时间（处于 TIME_WAIT 状态）。*/
 bool Socket::set_reuse_addr()
 {
     int flag = 1;
@@ -181,6 +189,7 @@ bool Socket::set_reuse_addr()
     return true;
 }
 
+/*设置端口复用，允许多个套接字绑定到相同的地址和端口，这在多线程或多进程环境下可以用于实现负载均衡。*/
 bool Socket::set_reuse_port()
 {
     int flag = 1;

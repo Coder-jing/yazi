@@ -16,7 +16,7 @@ ThreadPool::~ThreadPool()
 //创建线程池
 void ThreadPool::create(int threads)
 {
-    AutoLock lock(&m_mutex_idle);
+    AutoLock lock(&m_mutex_idle);   //自动加锁
     m_threads = threads;
     for (int i = 0; i < threads; i++)
     {

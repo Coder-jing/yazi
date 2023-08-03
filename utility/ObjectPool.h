@@ -21,7 +21,7 @@ public:
     void release(T * p);
 
 private:
-    std::list<T *> m_pool;
+    std::list<T*> m_pool;
     Mutex m_mutex;
 };
 
@@ -34,7 +34,7 @@ template <typename T>
 ObjectPool<T>::~ObjectPool()
 {
     AutoLock lock(&m_mutex);
-    for (typename std::list<T *>::iterator it = m_pool.begin(); it != m_pool.end(); it++)
+    for (typename std::list<T*>::iterator it = m_pool.begin(); it != m_pool.end(); it++)
     {
         if ((*it) != NULL)
         {

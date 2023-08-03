@@ -15,7 +15,7 @@ Workflow::Workflow()
 
 Workflow::~Workflow()
 {
-    for (map<string, Work *>::iterator it = m_works.begin(); it != m_works.end(); ++it)
+    for (map<string, Work*>::iterator it = m_works.begin(); it != m_works.end(); ++it)
     {
         delete it->second;
         it->second = NULL;

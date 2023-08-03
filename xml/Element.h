@@ -18,28 +18,28 @@ public:
     ~Element();
 
     // get element's name
-    const string & name() const;
+    const string& name() const;
 
     // set element's name
     void name(const string & name);
 
     // get element's text
-    const string & text() const;
+    const string& text() const;
 
     // set element's text
     void text(const string & text);
 
     // get element's attr
-    string & attr(const string & key);
+    string& attr(const string & key);
 
     // set element's attr
     void attr(const string & key, const string & value);
 
     // get child element by index
-    const Element & operator [] (int index) const;
+    const Element& operator [] (int index) const;
 
     // get child element by name
-    const Element & operator [] (const string & name) const;
+    const Element& operator [] (const string & name) const;
 
     // append child element
     void append(const Element & child);

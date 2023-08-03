@@ -12,7 +12,7 @@ using std::string;
 namespace yazi {
 namespace engine {
 
-typedef Plugin * (*create_func)();
+typedef Plugin* (*create_func)();
 typedef void (*destroy_func)(Plugin * plugin);
 
 

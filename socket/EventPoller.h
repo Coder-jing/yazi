@@ -94,7 +94,7 @@ protected:
     /**
      * 事件集
      */
-    struct epoll_event * m_events;
+    struct epoll_event* m_events;
 
     /**
      * 是否是ET模式

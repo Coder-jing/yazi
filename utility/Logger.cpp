@@ -15,9 +15,9 @@ const char* Logger::s_level[LEVEL_COUNT] =
     "FATAL"
 };
 
-Logger *Logger::m_instance = NULL;
+Logger* Logger::m_instance = NULL;
 
-Logger::Logger() : m_max(0), m_len(0), m_level(DEBUG)
+Logger::Logger() : m_max(1024*1024*5), m_len(0), m_level(DEBUG)
 {
 }
 
@@ -62,6 +62,8 @@ void Logger::log(Level level, const char* file, int line, const char* format, ..
         throw std::logic_error("open log file failed: " + m_filename);
     }
 
+    // 2023-08-01 12:26:00 DEBUG thread/ThreadPool.cpp:24 create thread fe2b9500
+
     time_t ticks = time(NULL);
     struct tm* ptm = localtime(&ticks);
     char timestamp[32];
@@ -69,7 +71,7 @@ void Logger::log(Level level, const char* file, int line, const char* format, ..
     strftime(timestamp, sizeof(timestamp), "%Y-%m-%d %H:%M:%S", ptm);
 
     int len = 0;
-    const char * fmt = "%s %s %s:%d ";
+    const char* fmt = "%s %s %s:%d ";
     len = snprintf(NULL, 0, fmt, timestamp, s_level[level], file, line);
     if (len > 0)
     {

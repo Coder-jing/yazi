@@ -19,9 +19,9 @@ class TaskFactory
 public:
     static Task * create(Socket * socket)
     {
-        return new WorkTask(socket);
+        // return new WorkTask(socket);
         // return new EchoTask(socket);
-        // return new PingTask(socket);
+         return new PingTask(socket);
     }
 };
 

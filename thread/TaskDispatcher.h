@@ -23,7 +23,7 @@ public:
     virtual void run();
 
 protected:
-    std::list<Task *> m_tasks;
+    std::list<Task*> m_tasks;
 };
 
 }}

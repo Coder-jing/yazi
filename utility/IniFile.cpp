@@ -32,7 +32,7 @@ Value::~Value()
 {
 }
 
-Value & Value::operator = (bool value)
+Value& Value::operator = (bool value)
 {
     if (value)
         m_value = "true";
@@ -41,7 +41,7 @@ Value & Value::operator = (bool value)
     return *this;
 }
 
-Value & Value::operator = (int value)
+Value& Value::operator = (int value)
 {
     ostringstream os;
     os << value;
@@ -49,7 +49,7 @@ Value & Value::operator = (int value)
     return *this;
 }
 
-Value & Value::operator = (double value)
+Value& Value::operator = (double value)
 {
     ostringstream os;
     os << value;
@@ -57,7 +57,7 @@ Value & Value::operator = (double value)
     return *this;
 }
 
-Value & Value::operator = (const string & value)
+Value& Value::operator=(const string & value)
 {
     m_value = value;
     return *this;
@@ -111,8 +111,8 @@ string IniFile::trim(string s)
     {
         return s;
     }
-    s.erase(0, s.find_first_not_of(" \r\n"));
-    s.erase(s.find_last_not_of(" \r\n") + 1);
+    s.erase(0, s.find_first_not_of("\r\n"));
+    s.erase(s.find_last_not_of("\r\n") + 1);
     return s;
 }
 
@@ -207,7 +207,7 @@ void IniFile::clear()
     m_inifile.clear();
 }
 
-bool IniFile::has(const string &section)
+bool IniFile::has(const string& section)
 {
     return (m_inifile.find(section) != m_inifile.end());
 }
